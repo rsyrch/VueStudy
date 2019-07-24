@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父组件向子组件传值</title>
+    <script src="../../js/vue/vue.js"></script>
+</head>
+<body>
+    <template id="com1">
+        <h1>子组件定义, 父组件值: {{parentMsg}}</h1>
+    </template>
+    <template id="com2">
+        <div>
+            <input type="button" value="组件2" @click="com2Click" />
+        </div>
+    </template>
+    <div id="app">
+        <my-com v-bind:parent-msg="msg"></my-com>
+        <my-com2 @parent-function="show"></my-com2>
+    </div>
+</body>
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            msg: "父组件数据"
+        },
+        methods: {
+            show: function(data1, data2) {
+                console.log("父组件传递方法给子组件 参数1:" + data1 + " 参数2:" + data2);
+            }
+        },
+        // 定义子组件,不能直接访问data数据,引用子组件的时候通过属性绑定传值 v-bind:props参数名
+        // props: 父组件传值, 数据只读
+        // data: 子组件私有数据, 各个组件的实例互不影响, 数据可读可写
+        components: {
+            myCom: {
+                template: "#com1",
+                props: ["parentMsg"]
+            },
+            myCom2: {
+                // 父组件传递方法给子组件 v-on:func="方法名"
+                template: "#com2",
+                methods: {
+                    com2Click: function() {
+                        // 触发传递的父组件方法, 后面是参数名
+                        this.$emit("parent-function", this.msg.name, this.msg.age);
+                    }
+                },
+                data: function() {
+                    return {
+                        msg: {name: "LuoChuan", age: 23}
+                    }
+                }
+            }
+        }
+    });
+</script>

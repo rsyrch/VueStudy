@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>钩子函数半场动画</title>
+    <script src="../../js/vue/vue.js"></script>
+    <style>
+        .ball {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <input type="button" value="半场动画" @click="showStatus = !showStatus" />
+       <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+            <div v-show="showStatus" class="ball"></div>
+       </transition>
+    </div>
+</body>
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            showStatus: false
+        },
+        methods: {
+            // el: 执行动画的dom元素,原生的js dom对象
+            beforeEnter: function(el) {
+                // 动画开始之前的位置
+                el.style.transform = "translate(0, 0)";
+            },
+            enter: function(el, done) {
+                // 动画中间执行状态
+                el.offsetWidth;
+                el.style.transform = "translate(150px, 450px)";
+                el.style.transition = "all 2s ease";
+                // 调用afterEnter函数
+                done();
+            },
+            afterEnter: function(el) {
+                // 动画完成之后
+                this.showStatus = false;
+            }
+        }
+    });
+</script>

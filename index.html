@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <!-- 数据双向绑定 -->
+        <input type="text" v-model="message">
+        <pre>
+            {{ $data | json }}
+        </pre>
+    </div>
+
+
+</body>
+</html>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            message: "Hello Word"
+        }
+    });
+</script>

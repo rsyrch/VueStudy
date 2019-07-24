@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>评论</title>
+    <script src="../../js/vue/vue.js"></script>
+    <script src="../../js/vue/vue-resource.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css" />
+</head>
+
+<template id="comment-template">
+    <div>
+        <div class="form-group">
+            <label>评论人:</label>
+            <input type="text" class="form-control" v-model="user">
+        </div>
+        <div class="form-group">
+            <label>评论内容:</label>
+            <input type="text" class="form-control" v-model="comment">
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="button" value="发表评论" @click="addComment">
+        </div>
+    </div>
+</template>
+
+<body>
+    <div id="app">
+        <basic-comment @update-comment="getInfo"></basic-comment>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="list in lists" :key="list.id">
+                <span class="badge">评论人: {{ list.user }}</span>
+                {{ list.comment }}
+            </li>
+        </ul>
+        
+    </div>
+</body>
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            lists: [
+                {id: 1, user: "李白", comment: "不管路途如何，重要的是抵达目的地"},
+                {id: 2, user: "张三", comment: "It's not the travelling, it's the arriving that matters"},
+                {id: 3, user: "马云", comment: "你好,世界"}
+            ]
+        },
+        methods: {
+            getInfo: function(param1, param2) {
+                console.log(param1 + " " + param2);
+                // 追加评论
+                
+            }
+        },
+        components: {
+            basicComment: {
+                template: "#comment-template",
+                data: function() {
+                    return {
+                        user: "",
+                        comment: "",
+                    }
+                },
+                methods: {
+                    addComment: function () {
+                        // 调用父组件的方法
+                        this.$emit("update-comment", this.user, this.comment);
+                    }
+                }
+            }
+        }
+    });
+</script>

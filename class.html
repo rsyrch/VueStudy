@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+    <style>
+        .errorName{
+            text-decoration: line-through;
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li :class="names.value ? 'errorName' : ''" v-for="name in names">{{ name.key }}</li>
+        </ul>
+    </div>
+</body>
+</html>
+
+<script>
+    var app = new Vue({
+       el: "#app",
+        data: {
+           names:[
+               {key:'ZhangSan', value: true},
+               {key: 'LiSi', value: false},
+               {key: 'WangWu', value: false}
+           ]
+        },
+        methods : {
+           selectClass : function (a) {
+               return a.key?'errorName':'';
+           }
+        },
+        components: {
+            
+        }
+    });
+</script>

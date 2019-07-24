@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件切换2</title>
+    <script src="../../js/vue/vue.js"></script>
+</head>
+<body>
+    <template id="id_login">
+        <div>
+            <h1>登录组件</h1>
+        </div>
+    </template>
+    <template id="id_register">
+        <div>
+            <h1>注册组件</h1>
+        </div>
+    </template>
+    <div id="app">
+        <a href="" @click.prevent="componentName='login'">Login</a>
+        <a href="" @click.prevent="componentName='register'">Register</a>
+
+        <component :is="componentName"></component>
+    </div>
+</body>
+</html>
+
+<script>
+    Vue.component("login", {
+        template: "#id_login"
+    });
+    Vue.component("register", {
+        template: "#id_register"
+    });
+
+    var app = new Vue({
+        el:"#app",
+        data: {
+            componentName: "login"
+        }
+    });
+</script>

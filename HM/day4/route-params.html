@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>路由传参</title>
+    <script src="../../js/vue/vue.js"></script>
+    <script src="../../js/vue/vue-resource.js"></script>
+    <script src="../../js/vue/vue-router.js"></script>
+    <style>
+        .myActive {
+            color: green;
+            font-weight: 800;
+            font-style: italic;
+            font-size: 80px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<template id="login">
+    <div>
+        <h1>登录组件</h1>
+        <h4>欢迎{{ this.$route.params.name }}和{{ this.$route.params.namex }}</h4>
+    </div>
+</template>
+    
+<template id="register">
+    <div>
+        <h1>注册组件</h1>
+    </div>
+</template>
+
+<body>
+    <div id="app">
+        <router-link to="/login/张三/李四">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script>
+    var login = {
+        template: "#login"
+    };
+    var register = {
+        template: "#register"
+    }
+    // 定义路由
+    var routerView = new VueRouter({
+        routes: [
+            {path: "/login/:name/:namex", component: login},
+            {path: "/register", component: register}
+        ],
+        linkActiveClass: "myActive"
+    });
+    var app = new Vue({
+        el: "#app",
+        router: routerView
+    });
+</script>

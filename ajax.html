@@ -1,0 +1,64 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <input type="button" @click="get()" value="ajax异步请求">
+    </div>
+</body>
+</html>
+
+<script>
+    // get请求
+    // 传递数据  this.$http.get("",{params : jsonData})
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello word"
+        },
+        methods: {
+            get: function() {
+                this.$http.get("note.txt").then(function (data) { 
+                    console.log(data.body);
+                }, 
+                function() {
+                    console.log("请求失败");
+                });
+            }
+        }
+    });
+
+    var jsonData = {"data": [
+            {name: "LuoChuan", age: 23},
+            {name: "LiFei", age: 25},
+            {name: "ZhangSan", age: 12}
+        ]};
+    // post请求  需要第三个参数 {emulateJSON:true}
+    var vm = new Vue({
+        el: "#vm",
+        data: {
+            message: "Hello Word"
+        },
+        methods: {
+            post: function() {
+                this.$htpp.post("", {"myData": jsonData}, {emulateJSON: true}).then(
+                    function(res) {
+                        console.log(res);
+                    },
+                    function(res) {
+
+                    }
+                );
+            }
+        }
+    });
+</script>

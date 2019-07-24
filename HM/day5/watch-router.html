@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>watch监听路由</title>
+    <script src="../../js/vue/vue.js"></script>
+    <script src="../../js/vue/vue-router.js"></script>
+</head>
+
+<template id="loginComId">
+    <div>
+        <h1>登录组件</h1>
+    </div>
+</template>
+
+<template id="registerComId">
+    <div>
+        <h1>注册组件</h1>
+    </div>
+</template>
+
+<body>
+    <div id="app">
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <router-view></view-router>
+    </div>
+</body>
+</html>
+
+<script>
+    var loginCom = {
+        template: "#loginComId"
+    };
+    var registerCom = {
+        template: "#registerComId"
+    };
+
+    // 路由对象
+    var indexRouter = new VueRouter({
+        routes: [
+            { path: '/login', component: loginCom },
+            { path: '/register', component: registerCom }
+        ]
+    });
+
+    var app = new Vue({
+        el: "#app",
+        data: {},
+        methods: {}, 
+        router: indexRouter,
+        watch: {
+            // 监听路由的改变
+            "$route.path": function(newVal, oldVal) {
+                console.log(newVal + " ----- " + oldVal);
+            }
+        }
+    });
+</script>

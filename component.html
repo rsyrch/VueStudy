@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+    <input v-model="parentMessage">
+    <br>
+    <counter v-bind:my-data="parentMessage"></counter>
+    <br>
+    <ol>
+        <hello v-for="thisList in lists" v-bind:list="thisList"></hello>
+    </ol>
+</div>
+
+<!-- 动态Prop -->
+<template id="counter-template">
+    <p>{{ myData }}</p>
+</template>
+
+<template id="fdata-template">
+    <li>{{ list.text }}</li>
+</template>
+</body>
+</html>
+
+<script>
+
+    // v-bind:my-data="parentMessage 得到父组件的数据
+    // rop 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是不会反过来
+
+    // 组件注册
+    Vue.component("counter", { // 组件名,自定义标签名
+        template: "#counter-template", // 模板id
+        props: ["myData"], // 属性
+    });
+
+    Vue.component("hello", { 
+        template: "#fdata-template",
+        props: ["list"],
+    });
+
+    // 组件属性验证
+    Vue,component("test", {
+        template: "#test-template",
+        props: {
+            // 基础类型检测, 任意类型都可以
+            propA: Number,
+            // 多种类型
+            propB: [Number, String],
+            // 必须是String
+            propC: {
+                type: String,
+                required: true
+            },
+            // 数字,有默认值
+            procD: {
+                type: Number,
+                default: 100
+            },
+            // 数组, 对象的默认值应当由一个工厂函数返回
+            propE:{
+                type: Object,
+                default: function() {
+                    return {message: "hello"};
+                }
+            },
+            // 自定义验证函数
+            propF: {
+                validator: function(value) {
+                    return value > 10;
+                }
+            }
+
+        }
+    });
+
+    // 根实例
+    var app = new Vue({
+        el: "#app",
+        data: {
+            parentMessage: "父组件内容",
+            lists: [
+                {text: "AAAAAA"},
+                {text: "BBBBBBB"},
+                {text: "CCCCCCC"}
+            ]
+        }
+    });
+</script>

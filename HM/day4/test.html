@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试</title>
+    <script src="../../js/vue/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="list in lists">{{ list }}</li>
+        </ul>
+    </div>
+</body>
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            lists: [1,2,3,4,5]
+        }
+    });
+    
+    function test() {
+        app.lists.push(6);
+    }
+    setTimeout("test()", 5000);
+</script>

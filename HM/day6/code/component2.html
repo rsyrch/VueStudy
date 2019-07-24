@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../../js/vue/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        11111111111
+    </div>
+</body>
+</html>
+<template id="helloComponent">
+    <h1>Hello Vue Component</h1>
+</template>
+<script>
+
+    // 组件
+    var login = {
+        template: "#helloComponent"
+    }
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+
+        },
+        methods: {
+            
+        },
+        render: function (createElement, context) {
+            // createElement: this is a function 将组件模板渲染成html 将替代整个HTML
+            return createElement(login);
+        }
+    })
+</script>

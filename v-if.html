@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>v-if</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+    </head>
+    <body>
+        <div id="app">
+            <p v-if="show">显示数据</p>
+        </div>
+        <div id="app2">
+            <div v-if="Math.random() > 0.5">
+                YES
+            </div>
+            <div v-else>
+                NO
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            show: true,
+            ok1: false
+        }
+    });
+    var app2 = new Vue({
+        el: "#app2",
+        data: {
+
+        }
+    });
+
+    var cnt=1;
+    var vm = new Vue({
+    el: '#app',
+    data: {
+        message: 'Runoob!'
+    },
+    computed: {
+        reversedMessage: function () {
+        cnt+=1;
+        return cnt+this.message.split('').reverse().join('')
+        }
+    },
+    methods: {
+        reversedMessage2: function () {
+        cnt+=1;
+        return cnt+this.message.split('').reverse().join('')
+        }
+    }
+    });
+    // cnt独立于vm对象之外
+    // computed:第一次渲染之后,vm 对象没有发生改变，于是界面渲染就直接用这个值，不再重复执行代码,依赖于缓存
+    // methods:只要用一次，函数代码就执行一次，于是每次返回值都不一样
+</script>

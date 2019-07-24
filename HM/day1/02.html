@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css" />
+</head>
+<body>
+    <div id="app">
+            <input @click="getInfo" type="button" class="btn btn-primary" value="Get" />
+            &nbsp;
+            <input @click="postInfo" type="button" class="btn btn-success" value="Post" />
+    </div>
+</body>
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+
+        },
+        methods: {
+            // get请求
+            getInfo: function() {
+                this.$http.get("http://127.0.0.1:8888/user/hello").then(function(result) {
+                    console.log(result.data);
+                },
+                function() {
+                    console.log("error");
+                });
+            },
+            // post请求
+            postInfo: function() {
+                this.$http.post("http://127.0.0.1:8888/test/hello", {data1: "Hello Word", data2: "10000"}, { emulateJSON: true}).then(function(result) {
+                    console.log(result.data);
+                },
+                function() {
+                    console.log("error");
+                });
+            }
+        }
+    });
+</script>

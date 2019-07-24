@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>经典视图布局</title>
+    <script src="../../js/vue/vue.js"></script>
+    <script src="../../js/vue/vue-resource.js"></script>
+    <script src="../../js/vue/vue-router.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: green;
+            height: 80px;
+        }
+        .contain {
+            display: flex;
+            height: 800px;
+        }
+        .left {
+            background-color: yellow;
+            flex: 2;
+        }
+        .main {
+            background-color: brown;
+            flex: 8;
+        }
+    </style>
+</head>
+
+<template id="headerComId">
+    <div class="header">
+        <h1>header</h1>
+    </div>
+</template>
+
+<template id="leftBoxComId">
+    <div class="left">
+        <h1>left</h1>
+    </div>
+</template>
+
+<template id="mainBoxComId">
+    <div class="main">
+        <h1>main</h1>
+    </div>
+</template>
+    
+<body>
+    <div id="app">
+        <router-view name="default"></router-view>
+        <div class="contain">
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var header = {
+        template: "#headerComId"
+    };
+    var leftBox = {
+        template: "#leftBoxComId"
+    };
+    var mainBox = {
+        template: "#mainBoxComId"
+    };
+
+    var myRouter = new VueRouter({ 
+        routes: [
+            {
+                path: "/",
+                components: {
+                    "default": header,
+                    "left": leftBox,
+                    "main": mainBox
+                }
+            }
+        ]
+    });
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+
+        },
+        methods: {
+
+        },
+        router: myRouter
+    });
+</script>

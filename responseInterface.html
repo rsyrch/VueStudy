@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>响应接口</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <p style = "font-size: 25px">{{ counter }}</p>
+        <button style="font-size: 25px" v-on:click="counter++">Button</button>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var myProduct = {id: 1, name: "book", price: "20"};
+    var app = new Vue({
+        el: "#app",
+        data: {
+            counter: 1,
+            product: myProduct
+        }
+    });
+    // 这样动态设置属性, userName属性不能使用set和get方法, 详情见console.log(app.product)
+    // app.product.userName = "LuoChuan";
+    // 对于新添加的属性,用Vue.set(对象, 属性, 值)
+    Vue.set(myProduct, "userIDCard", 12345);
+    // Vue.delete 用于删除动态添加的属性
+    Vue.delete(myProduct, "price");
+    console.log(app.product);
+    app.$watch("counter", function(nval, oval) {
+        alert("Number: " + oval + "--" + nval);
+    });
+    setTimeout(function () {
+        app.counter += 1;
+    }, 10000);
+</script>

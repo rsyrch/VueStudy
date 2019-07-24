@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue.js路由</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用router-link组件来导航 -->
+        <!-- 通过传入to属性指定链接. -->
+        <!-- router-link默认会被渲染成一个a标签 -->
+        <p>
+            <router-link to="/foo">go to foo</router-link>
+            <router-link to="/bar">go to bar</router-link>
+        </p>
+
+        <!-- 路由出口 -->
+        <!-- 路由匹配到的组件将渲染在这里 -->
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+
+<script>
+    // 定义路由组件
+    const Foo = {template: "<div>foo</div>"};
+    const Bar = {template: "<div>bar</div>"};
+
+    // 定义路由
+    // 每个路由映射一个组件
+    const routes = [
+        {path: "/foo", component: Foo},
+        {path: "/bar", component: Bar}
+    ];
+
+    // 创建route实例
+    const router = new VueRouter({
+        routes: routes
+    });
+
+    // 创建和挂载根实例
+    const app = new Vue({
+        router
+    }).$mount("#app");
+</script>

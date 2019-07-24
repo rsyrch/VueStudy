@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>路由</title>
+    <script src="../../js/vue/vue.js"></script>
+    <script src="../../js/vue/vue-resource.js"></script>
+    <script src="../../js/vue/vue-router.js"></script>
+    <style>
+        .myActive {
+            color: green;
+            font-weight: 800;
+            font-style: italic;
+            font-size: 80px;
+            text-decoration: underline;
+        }
+
+        .v-enter, .v-leave-to {
+            opacity: 0;
+            transform: translateX(140px)
+        }
+
+        .v-enter-active, .v-leave-active {
+            transition: all 0.5s ease
+        }
+    </style>
+</head>
+
+<!-- 登录组件 -->
+<template id="login_temp_id">
+    <div>
+        <h1>登录组件</h1>
+    </div>
+</template>
+
+<template id="register_temp_id">
+    <div>
+        <h1>注册组件</h1>
+    </div>
+</template>
+
+<body>
+    <div id="app">
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <transition model="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
+</body>
+</html>
+
+
+<script>
+    // 组件对象
+    var login = {
+        template: "#login_temp_id"
+    }
+    var register = {
+        template: "#register_temp_id"
+    }
+
+    // 路由对象
+    var routerView = new VueRouter({
+        // 路由匹配规则
+        routes: [
+            // component 必须是组件对象,不能是组件名
+
+            // 重定向
+            {path: "/", redirect: "/login"},
+            // 设置根路径显示登录组件 
+            // {path: "/", component: login},
+            {path: "/login", component: login},
+            {path: "/register", component: register},
+        ],
+        // 设置当前选中组件的样式类
+        linkActiveClass: "myActive"
+    });
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+
+        },
+        router: routerView,
+        components: {
+            loginCom: login,
+            registerCom: register
+        }
+    });
+</script>
