@@ -99,7 +99,7 @@
     7. vue-loader版本大于15 必须导入插件 const VueLoaderPlugin = require('vue-loader/lib/plugin') 否则找不到vue-loader
 
 
-五. ES6
+五. 组件的使用
     1. 导入模块:
         import 模块名 from "模块标识符"
         import "path"
@@ -119,3 +119,9 @@
     3. Node中使用
         (1). 模块导入: var moduleName = require("moduleIdentifier")
         (2). 成员暴露: module.exports 和 exports
+
+
+六. 路由的使用
+    1. 安装路由模块   cnpm i vue-router -D
+    2. 导入路由      import VueRouter from "vue-loader"
+    3. 安装路由功能   Vue.use(VueRouter)

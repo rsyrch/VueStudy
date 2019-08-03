@@ -1,24 +1,22 @@
 import Vue from "vue"
-import login from "./login.vue"
-// import Vue from "../node_modules/vue/dist/vue.js"
+import VueRouter from "vue-loader"
+import tseApp from "./app"
+import login from "./componemts/login"
+import register from "./componemts/register"
 
-Vue.config.productionTip = false 
+// 安装路由功能
+Vue.use(VueRouter);
+
+// 创建路由对象
+var router = new VueRouter({
+    routes: [
+        {path: "/login", component: login},
+        {path: "/register", component: register}
+    ]
+});
 
 var app = new Vue({
     el: "#app",
-    // 对于.vue组件,要用render渲染
-    // render: function(createElements) {
-    //     return createElements(login);
-    // }
-    // render简写
-    render: c => c(login)
+    render: c=> c(tseApp),
+    router: router
 });
-
-
-
-// import Person from "./test"
-// import { ThePet } from "./test"
-import Person, { ThePet } from "./test"
-
-console.log(Person)
-console.log(ThePet)

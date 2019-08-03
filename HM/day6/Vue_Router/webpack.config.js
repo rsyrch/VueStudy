@@ -1,5 +1,5 @@
 const path = require("path");
-const webpack = require("webpack")
+const webpack = require("webpack");
 
 // 内存中生成Html插件
 // 自动引入打包好的bundle.js
@@ -41,12 +41,6 @@ let config = {
              { test: /\.vue$/, use: ['vue-loader']}
          ]
      }
+};
 
-     // 导入Vue模块
-    //  resolve: {
-    //      alias: {
-    //          "vue$": "vue/dist/vue.js"
-    //      }
-    //  }
-}
-module.exports = config
+module.exports = config;
